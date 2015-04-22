@@ -20,8 +20,8 @@ Route::group(['prefix' => 'api', 'namespace' => 'API'], function () {
     Route::get('/products/{search?}', 'ProductController@getProducts');
     Route::get('/product/{id}', 'ProductController@getProduct');
     
-    Route::get('/categories', 'APIController@getCategories');
-    Route::get('/category/{id}', 'APIController@getCategory');
+    Route::get('/categories', 'CategoryController@getCategories');
+    Route::get('/category/{id}', 'CategoryController@getCategory');
     
     Route::get('/basket', 'APIController@getBasket');
     Route::post('/basket/{id}', 'APIController@addItemToBasket');
