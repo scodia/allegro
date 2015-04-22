@@ -1,4 +1,4 @@
-<?php namespace App\Commands;
+<?php namespace Allegro\Commands;
 
 abstract class Command {
 

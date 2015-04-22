@@ -11,4 +11,24 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::group(['prefix' => 'products'], function () {
+    Route::get('/', 'ProductController@getProducts');
+    Route::get('/{id}', 'ProductController@getProduct');
+});
+
+Route::group(['prefix' => 'api', 'namespace' => 'API'], function () {
+    Route::get('/products/{search?}', 'ProductController@getProducts');
+    Route::get('/product/{id}', 'ProductController@getProduct');
+    
+    Route::get('/categories', 'APIController@getCategories');
+    Route::get('/category/{id}', 'APIController@getCategory');
+    
+    Route::get('/basket', 'APIController@getBasket');
+    Route::post('/basket/{id}', 'APIController@addItemToBasket');
+    Route::put('/basket/{id}', 'APIController@updateBasketItem');
+    Route::delete('/basket/{id}', 'APIController@removeBasketItem');
+
+    Route::post('/payment', 'APIController@payment');
+    Route::post('/login', 'APIController@login');
+});
+
