@@ -5,7 +5,7 @@ use Allegro\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller {
+class CartController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -14,7 +14,8 @@ class CategoryController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$userId = 115;
+		return CartItem::where('user_ID', $userId)->toJson();
 	}
 
 	/**
@@ -34,7 +35,7 @@ class CategoryController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$cartItem = new CartItem();
 	}
 
 	/**

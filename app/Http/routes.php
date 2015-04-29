@@ -17,18 +17,9 @@ Route::group(['prefix' => 'products'], function () {
 });
 
 Route::group(['prefix' => 'api', 'namespace' => 'API'], function () {
-    Route::get('/products/{search?}', 'ProductController@getProducts');
-    Route::get('/product/{id}', 'ProductController@getProduct');
-    
-    Route::get('/categories', 'CategoryController@getCategories');
-    Route::get('/category/{id}', 'CategoryController@getCategory');
-    
-    Route::get('/basket', 'APIController@getBasket');
-    Route::post('/basket/{id}', 'APIController@addItemToBasket');
-    Route::put('/basket/{id}', 'APIController@updateBasketItem');
-    Route::delete('/basket/{id}', 'APIController@removeBasketItem');
-
-    Route::post('/payment', 'APIController@payment');
-    Route::post('/login', 'APIController@login');
+    Route::resource('products', 'ProductController');
+    Route::resource('categories', 'CategoryController');
+    Route::resource('cart', 'CartController');
+    Route::resource('order', 'OrderController');
+    Route::resource('user', 'UserController');
 });
-
