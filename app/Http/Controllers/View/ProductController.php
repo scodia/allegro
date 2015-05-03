@@ -6,7 +6,7 @@ use Allegro\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Allegro\Product;
-use Allegro\Http\Controllers\API\CartController;
+use Allegro\CartItem;
 
 class ProductController extends Controller {
 
@@ -19,7 +19,7 @@ class ProductController extends Controller {
 	{
 		return view('products.products', [
 			'products' => Product::all(),
-			'cartItems' => CartController
+			'cartItems' => CartItem::all()
 		]);
 	}
 
