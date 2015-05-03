@@ -17,7 +17,7 @@ class CreateCartItemsTable extends Migration {
 			$table->increments('id');
 			$table->integer('user_ID');
 			$table->integer('warehouse_product_ID');
-			$table->integer('qunatity');
+			$table->integer('quantity');
 			$table->timestamps();
 		});
 	}

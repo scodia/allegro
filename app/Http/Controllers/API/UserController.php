@@ -3,7 +3,12 @@
 use Allegro\Http\Requests;
 use Allegro\Http\Controllers\Controller;
 
+use Auth;
+use Session;
+use Hash;
+use Validator;
 use Illuminate\Http\Request;
+use Allegro\User;
 
 class UserController extends Controller {
 
@@ -12,9 +17,10 @@ class UserController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		//
+
+
 	}
 
 	/**
@@ -22,9 +28,11 @@ class UserController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
-		//
+
+
+
 	}
 
 	/**
@@ -32,9 +40,32 @@ class UserController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+				//Yeni Kullanıcı oluşturma 
+
+		$validator = Validator::make($request->all(), [
+		    'name' => 'required',
+		    'password' => 'required|min:8',
+		    'mail' => 'required|email|unique:users',
+		]);
+
+		if ($validator->fails()) {
+			return response()->json(['success' => false, 'errors' => $validator->errors()]);
+		}
+
+		$user = new User();
+		$user->name = $request->input('name');
+		$user->mail = $request->input('mail');
+		$user->password = Hash::make(md5($request->input('password')));
+		
+		if ($user->save()) {
+			Auth::loginUsingId($user->id);
+			return response()->json(['success' => true, 'id' => $user->id]);
+		} else {
+			return response()->json(['success' => false]);
+		}
+		
 	}
 
 	/**
@@ -43,9 +74,9 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(Request $request, $id)
 	{
-		//
+		
 	}
 
 	/**
@@ -76,7 +107,7 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
 		//
 	}

@@ -4,6 +4,8 @@ use Allegro\Http\Requests;
 use Allegro\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Auth;
+use Allegro\CartItem;
 
 class CartController extends Controller {
 
@@ -12,10 +14,9 @@ class CartController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$userId = 115;
-		return CartItem::where('user_ID', $userId)->toJson();
+		return CartItem::where('user_ID', $request->user()->id)->get()->toJson();
 	}
 
 	/**
@@ -33,9 +34,15 @@ class CartController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
+		$quantity = $request->input('quantity');
+
 		$cartItem = new CartItem();
+		$cartItem->user_ID = $request->user()->id;
+		$cartItem->quantity = $quantity > 0 ? $quantity : 1;
+		$cartItem->warehouse_product_ID = $request->input('product_ID');
+		$cartItem->save();
 	}
 
 	/**
@@ -46,7 +53,9 @@ class CartController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		//return response()->json(["status"=>false], 401);
+		return CartItem::find($id)->toJson();
+		
 	}
 
 	/**
@@ -66,9 +75,18 @@ class CartController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request, $id)
 	{
-		//
+		$quantity = $request->input('quantity');
+
+		$cartItem = CartItem::where(['id' => $id, 'user_ID' => $request->user()->id])->first();
+		if (!$cartItem) {
+			abort(404);
+		}
+		if ($quantity != $cartItem->quantity) {
+			$cartItem->quantity = $quantity > 0 ? $quantity : 1;
+			$cartItem->save();
+		}
 	}
 
 	/**
@@ -79,7 +97,9 @@ class CartController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		if (Auth::check()){
+			CartItem::find($id)->delete();
+		}
 	}
 
 }
