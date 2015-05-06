@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Allegro\Product;
 use Allegro\CartItem;
 
+
+
 class ProductController extends Controller {
 
 	/**
@@ -15,12 +17,13 @@ class ProductController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
 		return view('products.products', [
 			'products' => Product::all(),
-			'cartItems' => CartItem::all()
+			'cartItems' => CartItem::where('user_ID',$request->user()->id)->get()
 		]);
+		
 	}
 
 	/**
@@ -51,7 +54,10 @@ class ProductController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		return view('products.product',[ 
+			'product' => Product::find($id)
+			
+		]);
 	}
 
 	/**

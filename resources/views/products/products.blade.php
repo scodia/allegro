@@ -13,7 +13,7 @@ function addToCart(id) {
 			alert('Ürün eklendi');
 
 			$.get('/api/cart', function (data) {
-				$('#xyz').html(data);
+				$('#xyz').append(data);
 			});
 		}
 	});
@@ -34,7 +34,7 @@ function removeCart(id) {
 
 <ul>
 @foreach ($products as $product)
-    <li>{{ $product->name }}: {{ $product->price }} TL <button onclick="addToCart({{ $product->id }})">Sepete Ekle</button></li>
+    <li><a href="product/{!!$product->id!!}">İncele</a> {{ $product->name }}: {{ $product->price }} TL <button onclick="addToCart({{ $product->id }})">Sepete Ekle</button></li>
 @endforeach
 </ul>
 
