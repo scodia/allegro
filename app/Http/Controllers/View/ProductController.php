@@ -20,9 +20,15 @@ class ProductController extends Controller {
 	 */
 	public function index(Request $request)
 	{
+		if (Auth::check()) {
+			$cartItems = CartItem::where('user_ID', $request->user()->id)->get();
+		} else {
+			$cartItems = [];
+		}
+		
 		return view('products.products', [
 				'products' => Product::all(),
-				'cartItems' => CartItem::where('user_ID',$request->user()->id)->get()
+				'cartItems' => $cartItems
 		]);
 		
 	}

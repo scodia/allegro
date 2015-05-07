@@ -20,12 +20,15 @@ class LoginController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		
 		$login = [
 			'mail' => $request->input('email'),
 			'password' => md5($request->input('password'))
 		];
 
 		return response()->json(['success' => Auth::attempt($login)]);
+		
+		
 	}
 
 

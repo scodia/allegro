@@ -4,7 +4,7 @@ use Allegro\Http\Requests;
 use Allegro\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-
+use Auth;
 class LoginController extends Controller {
 
 	/**
@@ -12,11 +12,19 @@ class LoginController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
+				
+		if (!Auth::check()){
 			return view('user.login', [
 				
-		]);
+				
+
+
+			]);
+		}else{
+			return redirect()->guest('products');
+		}
 		
 	}
 

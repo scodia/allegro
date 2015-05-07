@@ -2,11 +2,12 @@
     <head>
         <title>Allegro - @yield('title')</title>
         <script src="/js/jquery.js"></script>
+       
     </head>
     <body>
     	<div class="HeaderContainer">
     		<ul class="uye">
-    			<li><a href="giris">Giriş</a></li>
+    			<li><a href="login">Giriş</a></li>
     			<li><a href="yeni_uye">Üye Ol</a></li>
     			<li><a href="sss">SSS</a></li>
     		<ul>

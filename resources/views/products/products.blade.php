@@ -4,8 +4,6 @@
 
 @section('content')
 
-Merhaba {{ Auth::user()->mail }}
-
 <script>
 function addToCart(id) {
 	$.post('/api/cart', {quantity: prompt('Kaç adet'), product_ID: id}, function (response, status, xhr) {
@@ -15,6 +13,17 @@ function addToCart(id) {
 			$.get('/api/cart', function (data) {
 				$('#xyz').append(data);
 			});
+		}
+	});
+}
+
+function logout(id){
+	$.ajax({
+		url: '/api/login/exit',
+		method: 'delete'
+	}, function (response, status, xhr) {
+		if (xhr.status === 200) {
+			alert('Çıkış yapıldı');
 		}
 	});
 }
@@ -31,6 +40,16 @@ function removeCart(id) {
 }
 
 </script>
+
+@if (Auth::check())
+
+Merhaba {{ Auth::user()->mail }}
+	<button onClick="logout()">Çıkış</button>
+@else
+
+Şimdi giriş yapın
+
+@endif
 
 <ul>
 @foreach ($products as $product)
