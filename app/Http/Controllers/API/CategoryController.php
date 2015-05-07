@@ -5,6 +5,9 @@ use Allegro\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use Allegro\Category;
+
+
 class CategoryController extends Controller {
 
 	/**
@@ -14,7 +17,7 @@ class CategoryController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		return Category::all()->toJson();
 	}
 
 	/**
@@ -32,9 +35,12 @@ class CategoryController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$Category = new Category();
+		$Category->name = $request->input('name');
+		$Category->description = $request->input('description');
+		$Category->save();
 	}
 
 	/**
@@ -45,7 +51,7 @@ class CategoryController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		return Category::find($id)->toJson();
 	}
 
 	/**
@@ -65,9 +71,12 @@ class CategoryController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request,$id)
 	{
-		//
+		$Category = Category::find($id);
+		$Category->name = $request->input('name');
+		$Category->description = $request->input('description');
+		$Category->save();
 	}
 
 	/**

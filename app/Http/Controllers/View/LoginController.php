@@ -5,24 +5,17 @@ use Allegro\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-use Allegro\Product;
-use Allegro\CartItem;
-
-use Auth;
-
-
-class ProductController extends Controller {
+class LoginController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index(Request $request)
+	public function index()
 	{
-		return view('products.products', [
-				'products' => Product::all(),
-				'cartItems' => CartItem::where('user_ID',$request->user()->id)->get()
+			return view('user.login', [
+				
 		]);
 		
 	}
@@ -55,10 +48,7 @@ class ProductController extends Controller {
 	 */
 	public function show($id)
 	{
-		return view('products.product',[ 
-			'product' => Product::find($id)
-			
-		]);
+		//
 	}
 
 	/**

@@ -3,9 +3,13 @@
 use Allegro\Http\Requests;
 use Allegro\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
-
 use Auth;
+use Session;
+use Hash;
+use Validator;
+use Illuminate\Http\Request;
+use Allegro\User;
+
 
 class LoginController extends Controller {
 
@@ -31,7 +35,7 @@ class LoginController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy()
+	public function destroy(Request $request)
 	{
 		return Auth::logout();
 	}

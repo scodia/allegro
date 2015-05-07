@@ -39,6 +39,7 @@ class ProductController extends Controller {
 		$product = new Product();
 		$product->name = $request->input('name');
 		$product->price = $request->input('price');
+		$product->category_ID = $request->input('category');
 		$product->save();
 	}
 
@@ -75,7 +76,9 @@ class ProductController extends Controller {
 		$product = Product::find($id);
 		$product->name = $request->input('name');
 		$product->price = $request->input('price');
+		$product->category_ID = $request->input('category');
 		$product->save();
+
 	}
 
 	/**

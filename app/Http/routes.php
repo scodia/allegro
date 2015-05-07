@@ -26,4 +26,6 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth'], 
 Route::group(['namespace' => 'View'], function () {
     Route::resource('products', 'ProductController');
     Route::resource('product','ProductController');
+    Route::resource('login','LoginController');
 });
+
