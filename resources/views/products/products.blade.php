@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master', ['categories' => $categories])
 
 @section('title', 'Ürünler')
 

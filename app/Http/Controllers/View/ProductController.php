@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Allegro\Product;
 use Allegro\CartItem;
+use Allegro\Category;
 
 use Auth;
 
@@ -18,8 +19,10 @@ class ProductController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index(Request $request)
+	public function index(Request $request, $category = 0)
 	{
+		$categories = Category::where('category_ID', $category)->get();
+
 		if (Auth::check()) {
 			$cartItems = CartItem::where('user_ID', $request->user()->id)->get();
 		} else {
@@ -27,8 +30,9 @@ class ProductController extends Controller {
 		}
 		
 		return view('products.products', [
-				'products' => Product::all(),
-				'cartItems' => $cartItems
+				'products' => Product::where('category_ID', $category)->get(),
+				'cartItems' => $cartItems,
+				'categories'=> $categories
 		]);
 		
 	}

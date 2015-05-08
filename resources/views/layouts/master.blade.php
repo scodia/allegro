@@ -16,12 +16,9 @@
 
         <div class="TopMenu">
             <ul>
-                <li><a href="category/Kadın">Kadın</a></li>
-                <li><a href="category/Erkek">Erkek</a></li>
-                <li><a href="category/Cocuk">Çocuk</a></li>
-                <li><a href="category/Ic_giyim">İç giyim</a></li>
-                <li><a href="category/Aksesuar">Aksesuar</a></li>
-
+                @foreach ($categories as $category)
+                <li><a href="/category/{{$category->id}}">{{$category->name}}</a></li>
+                @endforeach
             <ul>
         </di>
         <div class="ContentContainer">
