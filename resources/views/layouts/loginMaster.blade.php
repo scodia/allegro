@@ -1,7 +1,10 @@
 <html>
     <head>
-        <title>Allegro - @yield('title')</title>
-        <link rel="stylesheet" type="text/css" href="/css/login.css">
+        <title>@yield('title')</title>
+        
+        <script src="/js/jquery.js"></script>
+        <script src="/js/main.js"></script>
+        @yield('style')
     </head>
     <body>
     	

@@ -17,16 +17,7 @@ function addToCart(id) {
 	});
 }
 
-function logout(id){
-	$.ajax({
-		url: '/api/login/exit',
-		method: 'delete'
-	}, function (response, status, xhr) {
-		if (xhr.status === 200) {
-			alert('Çıkış yapıldı');
-		}
-	});
-}
+
 
 function removeCart(id) {
 	$.ajax({
@@ -41,19 +32,9 @@ function removeCart(id) {
 
 </script>
 
-@if (Auth::check())
-
-Merhaba {{ Auth::user()->mail }}
-	<button onClick="logout()">Çıkış</button>
-@else
-
-Şimdi giriş yapın
-
-@endif
-
 <ul>
 @foreach ($products as $product)
-    <li><a href="product/{!!$product->id!!}">İncele</a> {{ $product->name }}: {{ $product->price }} TL <button onclick="addToCart({{ $product->id }})">Sepete Ekle</button></li>
+    <li><a href="/product/{!!$product->id!!}">İncele</a> {{ $product->name }}: {{ $product->price }} TL <button onclick="addToCart({{ $product->id }})">Sepete Ekle</button></li>
 @endforeach
 </ul>
 

@@ -24,9 +24,13 @@ Route::group(['prefix' => 'api', 'namespace' => 'API', 'middleware' => 'auth'], 
 });
 
 Route::group(['namespace' => 'View'], function () {
+    Route::resource('/','ProductController');
     Route::resource('products', 'ProductController');
-    Route::resource('category/{id}', 'ProductController');
     Route::resource('product','ProductController');
     Route::resource('login','LoginController');
+    Route::resource('user','LoginController@store');
+    Route::resource('category/{id}', 'ProductController');
+    
+    
 });
 

@@ -23,7 +23,7 @@ input				{ width: 220px; display: block; padding: 4px; margin: 0 0 10px 0; font-
 					  color: #3a3a3a; font-family: Georgia, serif;}
 input[type=checkbox]{ width: 20px; margin: 0; display: inline-block; }
 					  
-.button				{ background: url(images/button-bg.png) repeat-x top center; border: 1px solid #999;
+.button				{ background: url(/img/button-bg.png) repeat-x top center; border: 1px solid #999;
 					  -moz-border-radius: 5px; padding: 5px; color: black; font-weight: bold;
 					  -webkit-border-radius: 5px; font-size: 13px;  width: 70px; }
 .button:hover		{ background: white; color: black; }

@@ -20,7 +20,7 @@ class LoginController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		
+
 		$login = [
 			'mail' => $request->input('email'),
 			'password' => md5($request->input('password'))
@@ -40,7 +40,8 @@ class LoginController extends Controller {
 	 */
 	public function destroy(Request $request)
 	{
-		return Auth::logout();
+		return response()->json(['exit'=>true , Auth::logout()]);
+
 	}
 
 }

@@ -40,6 +40,7 @@ class CategoryController extends Controller {
 		$Category = new Category();
 		$Category->name = $request->input('name');
 		$Category->description = $request->input('description');
+		$Category->category_id = $request->input('category');
 		$Category->save();
 	}
 

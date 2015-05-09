@@ -45,7 +45,8 @@ class LoginController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		return view('user.yeniUye');
+
 	}
 
 	/**

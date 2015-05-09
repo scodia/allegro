@@ -21,20 +21,32 @@ class ProductController extends Controller {
 	 */
 	public function index(Request $request, $category = 0)
 	{
-		$categories = Category::where('category_ID', $category)->get();
-
+		$categories = Category::where('category_ID', 0)->get();
+		
+		
+		for ($i=0;$i<$categories->count();$i++){
+			$x = Category::where('category_ID', $categories[$i]['id'])->select('name')->get();
+			$subCategory[]=['icerik'=>$x]; 
+		}
+		
+		//return $subCategory;
+		
 		if (Auth::check()) {
 			$cartItems = CartItem::where('user_ID', $request->user()->id)->get();
+			$toplamUrun = $cartItems->count();
 		} else {
 			$cartItems = [];
+			$toplamUrun = 0;
 		}
 		
 		return view('products.products', [
 				'products' => Product::where('category_ID', $category)->get(),
 				'cartItems' => $cartItems,
-				'categories'=> $categories
+				'categories'=> $categories,
+				'toplamUrun' => $toplamUrun,
+				'subCategory' =>$subCategory
 		]);
-		
+	
 	}
 
 	/**
@@ -63,12 +75,23 @@ class ProductController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(Request $request,$id,$category=0)
 	{
+		if (Auth::check()) {
+			$cartItems = CartItem::where('user_ID', $request->user()->id)->get();
+			$toplamUrun = $cartItems->count();
+		} else {
+			$cartItems = [];
+			$toplamUrun = 0;
+		}
+		$categories = Category::where('category_ID', $category)->get();
 		return view('products.product',[ 
-			'product' => Product::find($id)
+			'product' => Product::find($id),
+			'categories'=> $categories,
+			'toplamUrun'=> $toplamUrun
 			
 		]);
+
 	}
 
 	/**
