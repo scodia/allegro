@@ -8,8 +8,10 @@ a {
 .HeaderContainer {
 	position: relative;
 	display: block;
-
+    margin:0px auto 0px auto;
 	height: 150px;
+    width: 990px;
+
 
 }
 .uye {

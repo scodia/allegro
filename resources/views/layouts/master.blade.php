@@ -27,7 +27,7 @@
 
         <div class="topMenu">
             <ul id="topMenu">
-                @foreach ($categories as $category)
+             @foreach ($categories as $category)
                 <li><a href="/category/{{$category->id}}" class="drop">{{$category->name}}</a>
                     <div class="dropdown_4columns">
                         <div class="col_4">
@@ -35,31 +35,12 @@
                         </div>
                         <div class="col_1">    
                             <ul>
-                           
-                                
+                                @for($i = 0; $i<count($category);$i++)
+                                <li><a href="#">{{$category->id}}</a></li>
+                                @endfor
                             </ul>
                         </div>
-                        <div class="col_1">    
-                            <ul>
-                                <li><a href="#">asdasd</a></li>
-                                <li><a href="#">asdasd</a></li>
-                                <li><a href="#">asdasd</a></li>
-                                <li><a href="#">asdasd</a></li>
-                                <li><a href="#">asdasd</a></li>
-                                <li><a href="#">asdasd</a></li>
-                                <li><a href="#">asdasd</a></li>
-                                <li><a href="#">asdasd</a></li>
-                                <li><a href="#">asdasd</a></li>
-                            </ul>
-                        </div>
-                        <div class="col_1">
-                            <h3>Çok satanlar</h3>
-                            <img src="/img/login-page-bg.jpg" width="70" height="70"/>
-                        </div>
-                        <div class="col_1">
-                            <h3>Kampanyalar</h3>
-                            <img src="/img/login-page-bg.jpg" width="70" height="70"/>
-                        </div>
+                       
                     </div>
                 </li>
                 @endforeach

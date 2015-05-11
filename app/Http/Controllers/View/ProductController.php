@@ -26,10 +26,10 @@ class ProductController extends Controller {
 		
 		for ($i=0;$i<$categories->count();$i++){
 			$x = Category::where('category_ID', $categories[$i]['id'])->select('name')->get();
-			$subCategory[]=['icerik'=>$x]; 
+			$subCategory[]=['id'=> $categories[$i]['id'],$x]; 
 		}
 		
-		//return $subCategory;
+		return $subCategory;
 		
 		if (Auth::check()) {
 			$cartItems = CartItem::where('user_ID', $request->user()->id)->get();
