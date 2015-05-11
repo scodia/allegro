@@ -25,11 +25,11 @@ class ProductController extends Controller {
 		
 		
 		for ($i=0;$i<$categories->count();$i++){
-			$x = Category::where('category_ID', $categories[$i]['id'])->select('name')->get();
+			$x = Category::where('category_ID', $categories[$i]['id'])->select('name','id')->get();
 			$subCategory[]=['id'=> $categories[$i]['id'],$x]; 
 		}
 		
-		return $subCategory;
+		//return $subCategory;
 		
 		if (Auth::check()) {
 			$cartItems = CartItem::where('user_ID', $request->user()->id)->get();
@@ -77,6 +77,14 @@ class ProductController extends Controller {
 	 */
 	public function show(Request $request,$id,$category=0)
 	{
+		$categories = Category::where('category_ID', 0)->get();
+		
+		
+		for ($i=0;$i<$categories->count();$i++){
+			$x = Category::where('category_ID', $categories[$i]['id'])->select('name','id')->get();
+			$subCategory[]=['id'=> $categories[$i]['id'],$x]; 
+		}
+
 		if (Auth::check()) {
 			$cartItems = CartItem::where('user_ID', $request->user()->id)->get();
 			$toplamUrun = $cartItems->count();
@@ -88,7 +96,9 @@ class ProductController extends Controller {
 		return view('products.product',[ 
 			'product' => Product::find($id),
 			'categories'=> $categories,
-			'toplamUrun'=> $toplamUrun
+			'toplamUrun'=> $toplamUrun,
+			'subCategory' =>$subCategory
+
 			
 		]);
 

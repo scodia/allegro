@@ -27,23 +27,25 @@
 
         <div class="topMenu">
             <ul id="topMenu">
-             @foreach ($categories as $category)
-                <li><a href="/category/{{$category->id}}" class="drop">{{$category->name}}</a>
-                    <div class="dropdown_4columns">
-                        <div class="col_4">
+             @for ($i=0; $i<count($categories); $i++)
+                <li><a href="/category/{{$categories[$i]->id}}" class="drop">{{$categories[$i]->name}}</a>
+                    <div class="dropdown_3columns">
+                        <div class="col_3">
                             <h2>Başlık</h2>
                         </div>
                         <div class="col_1">    
                             <ul>
-                                @for($i = 0; $i<count($category);$i++)
-                                <li><a href="#">{{$category->id}}</a></li>
-                                @endfor
+                                
+                                @foreach ($subCategory[$i][0] as $sub)
+                                <li><a href="/category/{{$sub->id}}">{{$sub->name}}</a><li>
+                                @endforeach 
+                               
                             </ul>
                         </div>
                        
                     </div>
                 </li>
-                @endforeach
+                @endfor
             <ul>
         </div>
 
