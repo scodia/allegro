@@ -21,7 +21,7 @@
     		<ul>
             
             <ul class="sepet">
-                <span>Sepetim <strong>{{$toplamUrun}}</strong> ürün var</span>
+                <span><a href="/sepetim">Sepetim <strong>{{$toplamUrun}}</strong> ürün var</a></span>
             <ul>
     	</div>
 

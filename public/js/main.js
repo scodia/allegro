@@ -31,12 +31,38 @@ function removeCart(id) {
 	$.ajax({
 		url: '/api/cart/' + id,
 		method: 'delete'
-	}, function (response, status, xhr) {
+	}).success(function (response, status, xhr) {
+		if (xhr.status === 200 ) {
+			location.reload();
+			//alert('Ürün Sepetinizden silinmiştir.');
+
+		}else{
+			
+			
+		}
+	});
+	
+}
+
+function addToCart(id) {
+	$.post('/api/cart', {quantity: prompt('Kaç adet'), product_ID: id}, function (response, status, xhr) {
 		if (xhr.status === 200) {
-			alert('Ürün silindi');
+			
+
+			$.get('/api/cart', function (data) {
+				
+				var obj = JSON.parse(data);
+				
+				
+					document.write(obj.length);
+				
+			});
 		}
 	});
 }
+
+
+
 
 /*----------------------- SLİDER ----------------------- */ 
 $(document).ready(function(){
@@ -48,16 +74,28 @@ $(document).ready(function(){
 	 var $slider = $('#slider');
 	 var $sliderContainer = $slider.find('.slides');
 	 var $slides = $sliderContainer.find('.slide');
-
-	setInterval(function(){
+	 var $currentSlide = 1;
+	 var $total = $slides.length;
+	 //alert($total);
+function startSlider(){
+	var interval = setInterval(function(){
 		$sliderContainer.animate({'margin-left': '-='+widht},animationSpeed,
 			function(){
-				currentSlide++
-				if (currentSlide === $slides.lenght){
-					currentSlide = 1;
+				$currentSlide++;
+				if ($currentSlide === $total){
+					$currentSlide = 1;
 					$sliderContainer.css('margin-left',0);
+					
 				}
 			});	
-	},pause);
+		}
+	,pause);
+}	
 
+function stopSlider(){
+	clearInterval(interval);
+}
+	$slider.on('mouseenter',stopSlider).on('mouseLeave',startSlider);
+
+	startSlider();
 });

@@ -4,33 +4,6 @@
 
 @section('content')
 
-<script>
-function addToCart(id) {
-	$.post('/api/cart', {quantity: prompt('Kaç adet'), product_ID: id}, function (response, status, xhr) {
-		if (xhr.status === 200) {
-			alert('Ürün eklendi');
-
-			$.get('/api/cart', function (data) {
-				$('#xyz').append(data);
-			});
-		}
-	});
-}
-
-
-
-function removeCart(id) {
-	$.ajax({
-		url: '/api/cart/' + id,
-		method: 'delete'
-	}, function (response, status, xhr) {
-		if (xhr.status === 200) {
-			alert('Ürün silindi');
-		}
-	});
-}
-
-</script>
 
 <ul>
 @foreach ($products as $product)

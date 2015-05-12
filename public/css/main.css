@@ -103,10 +103,10 @@ a {
 }
 #topMenu li .drop {
     padding-right:21px;
-    background:url("img/drop.png") no-repeat right 8px;
+   /*background:url("img/drop.png") no-repeat right 8px;*/
 }
 #topMenu li:hover .drop {
-    background:url("img/drop.png") no-repeat right 7px;
+    /*background:url("img/drop.png") no-repeat right 7px;*/
 }
  
 /* Drop Down */
@@ -320,6 +320,10 @@ a {
 #slider .slide {
     float: left;
     list-style-type: none;
+    width: 980px;
+    height: 250px;
+}
+#slider img {
     width: 980px;
     height: 250px;
 }
