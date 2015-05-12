@@ -37,3 +37,27 @@ function removeCart(id) {
 		}
 	});
 }
+
+/*----------------------- SLİDER ----------------------- */ 
+$(document).ready(function(){
+	 //configuration
+	 var widht = 980;
+	 var animationSpeed = 1000;
+	 var pause = 3000;
+
+	 var $slider = $('#slider');
+	 var $sliderContainer = $slider.find('.slides');
+	 var $slides = $sliderContainer.find('.slide');
+
+	setInterval(function(){
+		$sliderContainer.animate({'margin-left': '-='+widht},animationSpeed,
+			function(){
+				currentSlide++
+				if (currentSlide === $slides.lenght){
+					currentSlide = 1;
+					$sliderContainer.css('margin-left',0);
+				}
+			});	
+	},pause);
+
+});
