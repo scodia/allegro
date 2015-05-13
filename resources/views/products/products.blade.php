@@ -2,21 +2,37 @@
 
 @section('title', 'Ürünler')
 
+
+@section ('slider')
+@include('slider.slider')
+@stop
+
+
 @section('content')
 
-
-<ul>
-@foreach ($products as $product)
-    <li><a href="/product/{!!$product->id!!}">İncele</a> {{ $product->name }}: {{ $product->price }} TL <button onclick="addToCart({{ $product->id }})">Sepete Ekle</button></li>
-@endforeach
-</ul>
-
-
-<h2>Sepetim</h2>
-<ul id="xyz">
-@foreach ($cartItems as $cartItem)
-    <li>Ürün adı :{{ $cartItem->warehouse_product_ID }} Ürün adeti:{{$cartItem->quantity}} <button onclick="removeCart({{ $cartItem->id }})">Sepetten Çıkar</button></li>
-@endforeach
-</ul>
-
+	@foreach ($category->subCategories as $category)
+		<li>{{$category->name}}</li>
+	@endforeach
+	<div class="categoryList">
+		<ul>
+		@foreach ($products as $product)
+		
+			
+			<li>
+				<a href="/product/{!!$product->id!!}">
+					<img src="/img/category/ceket_12.jpg">
+					<h3>{{ $product->name }}</h3>
+					<span class="price"> {{ $product->price }} TL </span>
+				</a>
+				@if ($product->isAvailable())
+				<button onclick="addToCart({{ $product->id }})">Sepete Ekle</button>
+				@else
+				Bu ürün bulunmamaktadır.
+				@endif
+			</li>
+		
+		
+		@endforeach	
+		</ul>
+	</div>
 @stop

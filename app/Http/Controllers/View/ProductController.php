@@ -14,19 +14,12 @@ use Auth;
 
 class ProductController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index(Request $request, $category = 0)
+	private function getProductPageData(Request $request, $categoryID = 0, $id = 0)
 	{
 		$categories = Category::where('category_ID', 0)->get();
 		
-		
-		for ($i=0;$i<$categories->count();$i++){
-			$x = Category::where('category_ID', $categories[$i]['id'])->select('name','id')->get();
-			$subCategory[]=['id'=> $categories[$i]['id'],$x]; 
+		foreach ($categories as $category){
+			$category->fillSubCategories();
 		}
 		
 		//return $subCategory;
@@ -38,15 +31,32 @@ class ProductController extends Controller {
 			$cartItems = [];
 			$toplamUrun = 0;
 		}
-		
-		return view('products.products', [
-				'products' => Product::where('category_ID', $category)->get(),
-				'cartItems' => $cartItems,
-				'categories'=> $categories,
-				'toplamUrun' => $toplamUrun,
-				'subCategory' =>$subCategory
-		]);
-	
+
+		if ($categoryID > 0) {
+			$category = Category::find($categoryID);
+			$category->fillSubCategories();
+		} else {
+			$category = [];
+		}
+
+		return [
+			'products' => Product::where('category_ID', $categoryID)->get(),
+			'cartItems' => $cartItems,
+			'categories'=> $categories,
+			'toplamUrun' => $toplamUrun,
+			'category' => $category,
+			'product' => ($id > 0 ? Product::find($id) : [])
+		];
+	}
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index(Request $request, $category = 0)
+	{
+		return view('products.products', $this->getProductPageData($request, $category));
 	}
 
 	/**
@@ -77,31 +87,7 @@ class ProductController extends Controller {
 	 */
 	public function show(Request $request,$id,$category=0)
 	{
-		$categories = Category::where('category_ID', 0)->get();
-		
-		
-		for ($i=0;$i<$categories->count();$i++){
-			$x = Category::where('category_ID', $categories[$i]['id'])->select('name','id')->get();
-			$subCategory[]=['id'=> $categories[$i]['id'],$x]; 
-		}
-
-		if (Auth::check()) {
-			$cartItems = CartItem::where('user_ID', $request->user()->id)->get();
-			$toplamUrun = $cartItems->count();
-		} else {
-			$cartItems = [];
-			$toplamUrun = 0;
-		}
-		$categories = Category::where('category_ID', $category)->get();
-		return view('products.product',[ 
-			'product' => Product::find($id),
-			'categories'=> $categories,
-			'toplamUrun'=> $toplamUrun,
-			'subCategory' =>$subCategory
-
-			
-		]);
-
+		return view('products.product', $this->getProductPageData($request, $category, $id));
 	}
 
 	/**

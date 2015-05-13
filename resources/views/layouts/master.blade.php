@@ -20,43 +20,39 @@
     			<li><a href="sss">SSS</a></li>
     		<ul>
             
-            <ul class="sepet">
-                <span><a href="/sepetim">Sepetim <strong>{{$toplamUrun}}</strong> ürün var</a></span>
-            <ul>
+            <div class="sepet">
+                <a href="/sepetim">Sepetim <strong>{{$toplamUrun}}</strong> ürün var</a>
+                <ul>
+                    @foreach ($cartItems as $cartItem)
+                    <li>Ürün adı :{{ $cartItem->product_ID }} Ürün adeti:{{$cartItem->quantity}} <button onclick="removeCart({{ $cartItem->id }})">Sil</button></li>
+                    @endforeach
+                </ul>
+            </div>
     	</div>
-
         <div class="topMenu">
             <ul id="topMenu">
-             @for ($i=0; $i<count($categories); $i++)
-                <li><a href="/category/{{$categories[$i]->id}}" class="drop">{{$categories[$i]->name}}</a>
+             @foreach($categories as $category)
+                <li><a href="/category/{{$category->id}}" class="drop">{{$category->name}}</a>
                     <div class="dropdown_3columns">
                         <div class="col_3">
                             <h2>Başlık</h2>
                         </div>
                         <div class="col_1">    
                             <ul>
-                                
-                                @foreach ($subCategory[$i][0] as $sub)
+                                @foreach ($category->subCategories as $sub)
                                 <li><a href="/category/{{$sub->id}}">{{$sub->name}}</a><li>
-                                @endforeach 
-                               
+                                @endforeach
                             </ul>
                         </div>
                        
                     </div>
                 </li>
-                @endfor
+                @endforeach
             <ul>
         </div>
 
         <div class="clear"></div>
-        <div id="slider">
-            <ul class="slides">
-                <li class="slide"><img src="/img/slider/1.jpg"></li>
-                <li class="slide"><img src="/img/slider/2.jpg"></li>
-                <li class="slide"><img src="/img/slider/3.jpg"></li>
-            </ul>
-        </div>
+        @yield('slider')
 
         <div class="ContentContainer">
             @yield('content')

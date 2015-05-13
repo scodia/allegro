@@ -30,7 +30,4 @@ Route::group(['namespace' => 'View'], function () {
     Route::resource('login','LoginController');
     Route::resource('user','LoginController@store');
     Route::resource('category/{id}', 'ProductController');
-    
-    
 });
-

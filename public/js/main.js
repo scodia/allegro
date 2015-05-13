@@ -27,18 +27,26 @@ $(function () {
 	});
 });
 
+function sepetList(){
+	$.get('/api/cart', function (data) {
+				
+				var data = JSON.parse(data);
+				
+					$('div.sepet a strong').html(data.length);
+					$('div.sepet ul').html('');
+					for (var i = 0; i < data.length; i++) {
+						$('div.sepet ul').append('<li>Ürün Adı:'+ data[i].product_ID + ' Ürün Adeti :' + data[i].quantity + '<button onclick="removeCart('+ data[i].id +')">sil</button></li>');
+					}
+			});
+}
+
 function removeCart(id) {
 	$.ajax({
 		url: '/api/cart/' + id,
 		method: 'delete'
 	}).success(function (response, status, xhr) {
 		if (xhr.status === 200 ) {
-			location.reload();
-			//alert('Ürün Sepetinizden silinmiştir.');
-
-		}else{
-			
-			
+			sepetList();
 		}
 	});
 	
@@ -47,16 +55,7 @@ function removeCart(id) {
 function addToCart(id) {
 	$.post('/api/cart', {quantity: prompt('Kaç adet'), product_ID: id}, function (response, status, xhr) {
 		if (xhr.status === 200) {
-			
-
-			$.get('/api/cart', function (data) {
-				
-				var obj = JSON.parse(data);
-				
-				
-					document.write(obj.length);
-				
-			});
+			sepetList();
 		}
 	});
 }
@@ -83,6 +82,7 @@ function startSlider(){
 			function(){
 				$currentSlide++;
 				if ($currentSlide === $total){
+					
 					$currentSlide = 1;
 					$sliderContainer.css('margin-left',0);
 					

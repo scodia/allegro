@@ -327,3 +327,55 @@ a {
     width: 980px;
     height: 250px;
 }
+.sepet {
+    list-style-type: none;
+    margin-top: 80px;
+    position: absolute;
+}
+.sepet ul {
+    border: thin solid #000;
+    display: none;
+}
+.sepet ul li {
+    position: relative;
+    display: inline-block;
+    background-color: #ffffff;
+    width: 250px;
+    overflow: hidden;
+
+
+}
+.sepet:hover ul {
+    display: block;
+}
+
+
+
+/* KATEGORİ LİSTELE*/
+.categoryList {
+    position: relative;
+    display: block;
+    margin:5px auto 0px auto;
+    width: 980px;
+} 
+.categoryList ul {
+    margin:10px;
+    
+}
+
+.categoryList ul li {
+    float: left;
+    margin:10px;
+    width: 300px;
+    height: 400px;
+    overflow: hidden;
+    border-bottom: solid 2px;
+    border-top: solid 2px ;
+
+}
+
+.categoryList img {
+    width: 300px;
+    height: 300px;
+    
+}

@@ -6,6 +6,7 @@ use Allegro\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use Allegro\CartItem;
+use Allegro\Product;
 
 class CartController extends Controller {
 
@@ -37,12 +38,29 @@ class CartController extends Controller {
 	public function store(Request $request)
 	{
 		$quantity = $request->input('quantity');
+		$product_ID = $request->input('product_ID');
+		$user_ID = $request->user()->id;
+		$check = CartItem::where(['product_ID' =>$product_ID, 'user_ID'=>$user_ID])->first();
+		
+		
 
-		$cartItem = new CartItem();
-		$cartItem->user_ID = $request->user()->id;
-		$cartItem->quantity = $quantity > 0 ? $quantity : 1;
-		$cartItem->warehouse_product_ID = $request->input('product_ID');
-		$cartItem->save();
+		if (0 < count($check)) {
+			if ($quantity=="") {$quantity = 1;}
+			self::update($request , $check->id ,$quantity);		
+		}else{
+			$product = Product::find($product_ID);
+			if ($product->isAvailableForQuantity($quantity)) {
+				$cartItem = new CartItem();
+				$cartItem->user_ID = $user_ID;
+				$cartItem->quantity = $quantity > 0 ? $quantity : 1;
+				$cartItem->product_ID = $product_ID;
+				$cartItem->save();
+			} else {
+				return response()->json(['success' => false, 'message' => 'Yeterince ürün bulunmamaktadır.']);
+			}
+			
+		}
+
 	}
 
 	/**
@@ -54,7 +72,7 @@ class CartController extends Controller {
 	public function show($id)
 	{
 		//return response()->json(["status"=>false], 401);
-		return CartItem::find($id)->toJson();
+		return CartItem::find($id);
 		
 	}
 
