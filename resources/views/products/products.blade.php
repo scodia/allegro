@@ -4,15 +4,21 @@
 
 
 @section ('slider')
-@include('slider.slider')
+	@include('slider.slider')
 @stop
 
 
 @section('content')
+		
+			<ul>
+			@foreach ($category->subCategories as $category)
+				<li>{{$category->name}}</li>
+			@endforeach
+			</ul>
 
-	@foreach ($category->subCategories as $category)
-		<li>{{$category->name}}</li>
-	@endforeach
+
+
+
 	<div class="categoryList">
 		<ul>
 		@foreach ($products as $product)

@@ -36,7 +36,7 @@ class ProductController extends Controller {
 			$category = Category::find($categoryID);
 			$category->fillSubCategories();
 		} else {
-			$category = [];
+			$category->fillMainCategories();
 		}
 
 		return [

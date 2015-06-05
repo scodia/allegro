@@ -53,11 +53,30 @@ function removeCart(id) {
 }
 
 function addToCart(id) {
-	$.post('/api/cart', {quantity: prompt('Kaç adet'), product_ID: id}, function (response, status, xhr) {
+	var $quan = document.getElementById('quantity').value;
+	
+	$.post('/api/cart', {quantity: $quan, product_ID: id}, function (response, status, xhr) {
 		if (xhr.status === 200) {
 			sepetList();
 		}
 	});
+}
+
+
+
+function discountCalculator (discount,prePrice){
+	var x = discount;
+	var Price = prePrice;
+	var newPrice;
+	
+	discount = Price * x / 100;
+	newPrice = Price - discount;
+	var s = document.getElementById('newPrice').innerHTML = newPrice + " TL";
+	
+	
+
+
+
 }
 
 

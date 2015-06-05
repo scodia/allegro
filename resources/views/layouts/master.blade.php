@@ -4,6 +4,7 @@
         <script src="/js/jquery.js"></script>
         <script src="/js/main.js"></script>
         <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+        @yield('headAdd')
     </head>
     <body>
     	<div class="HeaderContainer">
@@ -57,7 +58,7 @@
         <div class="ContentContainer">
             @yield('content')
         </div>
-
+        <div class="clear"></div>
         <div class="FooterContainer">
             <p>Footer</p>
         </di>

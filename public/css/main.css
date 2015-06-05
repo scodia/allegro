@@ -33,6 +33,8 @@ a {
 /* Navigation Bar */
  
 #topMenu {
+    z-index: 1;
+    position: relative;
     list-style:none;
     width:940px;
     margin:30px auto 0px auto;
@@ -306,7 +308,7 @@ a {
     margin:0px auto 0px auto;
     height: 250px;
     width: 980px;
-    z-index: -1;
+   
     overflow: hidden;
 }
 
@@ -378,4 +380,120 @@ a {
     width: 300px;
     height: 300px;
     
+}
+
+[data-zoom] {
+        float: left;
+        border-radius: 5px;
+        box-shadow: 0px 0px 1px #000;
+        -webkit-transition-property: box-shadow, -webkit-transform, margin-top;
+        -webkit-transition-duration: 400ms;
+        position: relative;
+    }
+
+[data-zoom].onzoom {
+        box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.5);
+        margin-top: -10px;
+        cursor: move;
+
+    }
+
+.product {
+
+        width: 90%;
+        height: 300px;
+        float: left;
+        margin: 10px;
+        background-color: #ededed;
+        border-radius: 5px;
+        padding: 15px;
+        text-align: center;
+        position: relative;
+    }
+
+.product ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        bottom: 0;
+    }
+
+.product ul li {
+        float: left;
+
+    }
+
+.product ul li a {
+        cursor: -webkit-zoom-in;
+    }
+
+.product ul li img {
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+        border-radius: 10px;
+    }
+.product button {
+    width: 100px;
+    height: 30px;
+    position: absolute;
+    font-size: 16px;
+    bottom:10px;
+    font-family: serif;
+    background-color: #f90;
+    border-radius: 10px;
+    left: 550px;
+}
+.product input {
+    width: 50px;
+    height: 30px;
+    position: absolute;
+    border-radius: 10px;
+    bottom: 10px ;
+    left: 500px;
+    font-size: 16px;
+    bottom:10px;
+    font-family: serif;
+    padding-left: 13px;
+}
+.product span {
+    font-size: 35px;
+    position: absolute;
+    bottom: 50px;
+    
+}
+#newPrice {
+  left: 350px;      
+}
+.product .indirim{
+    position: absolute;
+    margin: 0;
+    top:0px;
+    right: 0px;
+    width: 60px;
+    height: 60px;
+    background-image: url("/img/indirim.png");
+
+}
+.product .discount {
+    margin: 0;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    color: white;
+}
+.product .prePrice {
+    position: absolute;
+    font-size: 25px;
+    top:220px;
+    left:350px;
+    text-decoration: line-through;
+    color: red;
+}
+.product h1 {
+    position: absolute;
+    left:350px;
 }

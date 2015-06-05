@@ -17,6 +17,7 @@ class Product extends Model {
 		}
 	}
 
+
 	public function isAvailable()
 	{
 		return $this->getWarehouseQuantity() > 0;
